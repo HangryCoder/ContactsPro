@@ -1,9 +1,7 @@
 package com.hangrycoder.contactspro
 
-import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.util.Log
 
 class MainActivity : AppCompatActivity() {
