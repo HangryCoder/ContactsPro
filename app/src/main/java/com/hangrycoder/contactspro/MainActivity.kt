@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         val contactsPagerAdapter = ContactsPagerAdapter(supportFragmentManager)
         viewPager.adapter = contactsPagerAdapter
 
-        tabLayout.setupWithViewPager(viewPager)
+//        tabLayout.setupWithViewPager(viewPager)
 
         /* ContactsUtil.getAllContacts(this).forEach { name ->
              Log.d("CONTACTS PRO", name)
