@@ -18,5 +18,14 @@ class ContactsPagerAdapter(fragmentManager: FragmentManager) :
         }
     }
 
+    override fun getPageTitle(position: Int): CharSequence? {
+        return when (position) {
+            0 -> "Call History"
+            1 -> "Speed Dial"
+            2 -> "Contacts"
+            else -> "Contacts"
+        }
+    }
+
     override fun getCount(): Int = 3
 }
