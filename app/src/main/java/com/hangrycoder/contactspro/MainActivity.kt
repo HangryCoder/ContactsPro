@@ -12,11 +12,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val contactsPagerAdapter = ContactsPagerAdapter(supportFragmentManager)
-        val viewPager =  findViewById<ViewPager>(R.id.viewPager)
+        val viewPager = findViewById<ViewPager>(R.id.viewPager)
         viewPager.adapter = contactsPagerAdapter
 
-        ContactsUtil.getAllContacts(this).forEach { name ->
-            Log.d("CONTACTS PRO", name)
-        }
+        /* ContactsUtil.getAllContacts(this).forEach { name ->
+             Log.d("CONTACTS PRO", name)
+         }*/
     }
 }
