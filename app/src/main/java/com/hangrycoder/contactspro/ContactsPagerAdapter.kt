@@ -11,8 +11,8 @@ class ContactsPagerAdapter(fragmentManager: FragmentManager) :
     FragmentPagerAdapter(fragmentManager) {
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> CallHistoryFragment()
-            1 -> SpeedDialFragment()
+            0 -> SpeedDialFragment()
+            1 -> CallHistoryFragment()
             2 -> ContactsFragment()
             else -> CallHistoryFragment()
         }
@@ -20,8 +20,8 @@ class ContactsPagerAdapter(fragmentManager: FragmentManager) :
 
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
-            0 -> "Call History"
-            1 -> "Speed Dial"
+            0 -> "Speed Dial"
+            1 -> "Call History"
             2 -> "Contacts"
             else -> "Contacts"
         }
