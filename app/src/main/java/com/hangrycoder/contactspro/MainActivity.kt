@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
         val contactsPagerAdapter = ContactsPagerAdapter(supportFragmentManager)
         viewPager.adapter = contactsPagerAdapter
 
-        toolbar.title = "Contacts"
         setSupportActionBar(toolbar)
 
         smartTabLayout.setViewPager(viewPager)
