@@ -3,4 +3,5 @@
     <string name="speed_dial">Speed Dial</string>
     <string name="call_history">Call History</string>
     <string name="contacts">Contacts</string>
+    <string name="search_contact">Search Contact</string>
 </resources>
