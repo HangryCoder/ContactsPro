@@ -3,8 +3,8 @@
     android:id="@+id/custom_text"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:fontFamily="@font/biryani_bold"
+    android:fontFamily="@font/product_sans_medium"
     android:gravity="center"
     android:paddingHorizontal="16dp"
     android:textColor="@color/custom_tab"
-    android:textSize="12sp" />
+    android:textSize="14sp" />
