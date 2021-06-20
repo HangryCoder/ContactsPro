@@ -53,6 +53,9 @@ dependencies {
     implementation "com.airbnb.android:epoxy:$epoxyVersion"
     kapt "com.airbnb.android:epoxy-processor:$epoxyVersion"
 
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+
 
     implementation "com.ogaclejapan.smarttablayout:library:$smart_tab_layout_version"
 
