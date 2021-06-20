@@ -6,7 +6,7 @@
     android:paddingHorizontal="16dp"
     android:paddingVertical="8dp">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/alphabet_index"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/contact_profile_photo" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/contact_profile_photo"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -24,7 +24,7 @@
         app:layout_constraintStart_toEndOf="@+id/alphabet_index"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/contact_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
