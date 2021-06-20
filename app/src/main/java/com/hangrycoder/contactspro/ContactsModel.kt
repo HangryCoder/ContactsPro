@@ -7,6 +7,7 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
+import com.bumptech.glide.Glide
 
 @EpoxyModelClass
 abstract class ContactsModel : EpoxyModelWithHolder<ContactsModel.ContactsHolder>() {
@@ -25,6 +26,11 @@ abstract class ContactsModel : EpoxyModelWithHolder<ContactsModel.ContactsHolder
         with(holder) {
             contactName.text = name
             alphabetIndex.text = "A"
+
+            Glide.with(contactProfilePhoto.context)
+                .load(R.drawable.ic_launcher_background)
+                .circleCrop()
+                .into(contactProfilePhoto)
         }
     }
 
