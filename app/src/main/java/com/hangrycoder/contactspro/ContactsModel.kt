@@ -5,8 +5,10 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyHolder
+import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 
+@EpoxyModelClass
 abstract class ContactsModel : EpoxyModelWithHolder<ContactsModel.ContactsHolder>() {
 
     @EpoxyAttribute
