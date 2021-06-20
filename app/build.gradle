@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -31,6 +32,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
@@ -46,7 +51,7 @@ dependencies {
 
     implementation "xyz.danoz:recyclerviewfastscroller:$fastScrollerVersion"
     implementation "com.airbnb.android:epoxy:$epoxyVersion"
-    annotationProcessor "com.airbnb.android:epoxy-processor:$epoxyVersion"
+    kapt "com.airbnb.android:epoxy-processor:$epoxyVersion"
 
 
     implementation "com.ogaclejapan.smarttablayout:library:$smart_tab_layout_version"
