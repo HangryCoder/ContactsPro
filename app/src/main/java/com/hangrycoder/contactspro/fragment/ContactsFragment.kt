@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.airbnb.epoxy.EpoxyRecyclerView
 import com.hangrycoder.contactspro.Contacts
 import com.hangrycoder.contactspro.ContactsController
 import com.hangrycoder.contactspro.R
@@ -13,7 +12,7 @@ import kotlinx.android.synthetic.main.fragment_contacts.view.*
 
 class ContactsFragment : Fragment() {
 
-    private var contactsController = ContactsController()
+    private lateinit var contactsController: ContactsController
 
     private val contactsList = listOf(
         Contacts(id = 1, name = "Krupa Bhat", phoneNumber = "8698073911", profilePhoto = ""),
@@ -40,13 +39,15 @@ class ContactsFragment : Fragment() {
         return view
     }
 
-     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-         super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-         with(view) {
-             contactsController.contactsList = contactsList
-             contacts_recycler_view.setController(contactsController)
-             contacts_recycler_view.requestModelBuild()
-         }
-     }
+        with(view) {
+            contactsController = ContactsController()
+            contactsController.contactsList = contactsList
+            contactsController.requestModelBuild()
+
+            contacts_recycler_view.setController(contactsController)
+        }
+    }
 }

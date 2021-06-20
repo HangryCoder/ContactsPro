@@ -8,11 +8,12 @@ class ContactsController : EpoxyController() {
 
     override fun buildModels() {
         contactsList.forEach {
-            ContactsModel_()
-                .id(it.id)
-                .name(it.name)
-                .profilePhoto(it.profilePhoto)
-                .alphabetIndex(it.name.first().toString())
+            contacts {
+                id(it.id)
+                name(it.name)
+                profilePhoto(it.profilePhoto)
+                alphabetIndex(it.name.first().toString())
+            }
         }
     }
 }
