@@ -1,25 +1,20 @@
 package com.hangrycoder.contactspro.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.hangrycoder.contactspro.Contacts
 import com.hangrycoder.contactspro.ContactsController
+import com.hangrycoder.contactspro.ContactsUtil
 import com.hangrycoder.contactspro.R
 import kotlinx.android.synthetic.main.fragment_contacts.view.*
 
 class ContactsFragment : Fragment() {
 
     private lateinit var contactsController: ContactsController
-
-    private val contactsList = listOf(
-        Contacts(id = 1, name = "Krupa Bhat", phoneNumber = "8698073911", profilePhoto = ""),
-        Contacts(id = 2, name = "Momma", phoneNumber = "9922108586", profilePhoto = ""),
-        Contacts(id = 3, name = "Daddy", phoneNumber = "9822589850", profilePhoto = ""),
-        Contacts(id = 4, name = "Shilpa Wadji", phoneNumber = "9822589864", profilePhoto = "")
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,8 +38,15 @@ class ContactsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(view) {
+
+            val contacts = ContactsUtil.getAllContacts(requireContext()).also {
+                it.sortBy { contact ->
+                    contact.name
+                }
+            }
+
             contactsController = ContactsController()
-            contactsController.contactsList = contactsList
+            contactsController.contactsList = contacts
             contactsController.requestModelBuild()
 
             contacts_recycler_view.setController(contactsController)
