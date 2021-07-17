@@ -16,7 +16,7 @@ abstract class ContactsModel : EpoxyModelWithHolder<ContactsModel.ContactsHolder
     lateinit var name: String
 
     @EpoxyAttribute
-    lateinit var profilePhoto: String
+    var profilePhoto: String? = null
 
     @EpoxyAttribute
     lateinit var alphabetIndex: String
@@ -28,7 +28,7 @@ abstract class ContactsModel : EpoxyModelWithHolder<ContactsModel.ContactsHolder
             alphabetIndex.text = name[0].toString()
 
             Glide.with(contactProfilePhoto.context)
-                .load(R.drawable.ic_launcher_background)
+                .load(profilePhoto ?: R.drawable.ic_launcher_background)
                 .circleCrop()
                 .into(contactProfilePhoto)
         }

@@ -24,6 +24,12 @@ object ContactsUtil {
                         ContactsContract.Contacts.DISPLAY_NAME
                     )
                 )
+                val profilePhoto = cur.getString(
+                    cur.getColumnIndex(
+                        ContactsContract.Contacts.PHOTO_THUMBNAIL_URI
+                    )
+                )
+
                 if (cur.getInt(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
                     val pCur = cr.query(
                         ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
@@ -40,7 +46,7 @@ object ContactsUtil {
                         )
                         phoneNumbers.add(phoneNo)
                     }
-                    contactsList.add(Contacts(id, name, "", phoneNumbers))
+                    contactsList.add(Contacts(id, name, profilePhoto, phoneNumbers))
 
                     pCur.close()
                 }
