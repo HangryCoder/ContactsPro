@@ -25,7 +25,7 @@ abstract class ContactsModel : EpoxyModelWithHolder<ContactsModel.ContactsHolder
         super.bind(holder)
         with(holder) {
             contactName.text = name
-            alphabetIndex.text = "A"
+            alphabetIndex.text = name[0].toString()
 
             Glide.with(contactProfilePhoto.context)
                 .load(R.drawable.ic_launcher_background)
