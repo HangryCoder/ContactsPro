@@ -30,15 +30,18 @@ object ContactsUtil {
                         null,
                         ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
                         arrayOf(id), null
-                    );
+                    )
+                    val phoneNumbers = arrayListOf<String>()
                     while (pCur!!.moveToNext()) {
                         val phoneNo = pCur.getString(
                             pCur.getColumnIndex(
                                 ContactsContract.CommonDataKinds.Phone.NUMBER
                             )
                         )
-                        contactsList.add(Contacts(id, name, "", phoneNo))
+                        phoneNumbers.add(phoneNo)
                     }
+                    contactsList.add(Contacts(id, name, "", phoneNumbers))
+
                     pCur.close()
                 }
             }
