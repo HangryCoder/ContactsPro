@@ -41,7 +41,7 @@ class ContactsFragment : Fragment() {
 
             val contacts = ContactsUtil.getAllContacts(requireContext()).also {
                 it.sortBy { contact ->
-                    contact.name
+                    contact.name.lowercase()
                 }
             }
 
