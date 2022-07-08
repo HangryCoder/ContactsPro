@@ -14,7 +14,6 @@ class ContactsViewModel(context: Context) : ViewModel() {
         _contactsList
     }
 
-
     fun fetchContacts() {
         _contactsList.value = repository.getAllContacts().sortedBy { it.name.lowercase() }
     }
