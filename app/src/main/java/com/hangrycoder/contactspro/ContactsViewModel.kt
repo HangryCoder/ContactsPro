@@ -1,12 +1,19 @@
 package com.hangrycoder.contactspro
 
-import androidx.lifecycle.LiveData
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ContactsViewModel: ViewModel() {
+class ContactsViewModel(context: Context) : ViewModel() {
 
-    private var contactsList =  MutableLiveData<List<Contacts>>()
+    private val repository = ContactsRepository(context)
 
-   // fun fetchContacts = ContactsUtil.getAllContacts()
+    private var _contactsList = MutableLiveData<List<Contacts>>()
+    val contactsList by lazy {
+        _contactsList
+    }
+
+    fun fetchContacts() {
+        _contactsList.value = repository.getAllContacts()
+    }
 }
