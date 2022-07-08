@@ -54,6 +54,7 @@ class ContactsFragment : Fragment() {
         contacts_recycler_view.setController(contactsController)*/
 
         contactsController = ContactsController()
+        view.contacts_recycler_view.setController(contactsController)
 
         viewModel.fetchContacts()
         viewModel.contactsList.observe(viewLifecycleOwner) { contacts ->
