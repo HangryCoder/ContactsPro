@@ -6,15 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.hangrycoder.contactspro.Contacts
-import com.hangrycoder.contactspro.ContactsController
-import com.hangrycoder.contactspro.ContactsUtil
-import com.hangrycoder.contactspro.R
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.hangrycoder.contactspro.*
 import kotlinx.android.synthetic.main.fragment_contacts.view.*
 
 class ContactsFragment : Fragment() {
 
     private lateinit var contactsController: ContactsController
+
+    private val viewModel by viewModels<ContactsViewModel> {
+        ContactsViewModelFactory(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,19 +41,24 @@ class ContactsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(view) {
-
-            val contacts = ContactsUtil.getAllContacts(requireContext()).also {
-                it.sortBy { contact ->
-                    contact.name.lowercase()
-                }
+        /*val contacts = ContactsUtil.getAllContacts(requireContext()).also {
+            it.sortBy { contact ->
+                contact.name.lowercase()
             }
+        }
 
-            contactsController = ContactsController()
+        contactsController = ContactsController()
+        contactsController.contactsList = contacts
+        contactsController.requestModelBuild()
+
+        contacts_recycler_view.setController(contactsController)*/
+
+        contactsController = ContactsController()
+
+        viewModel.fetchContacts()
+        viewModel.contactsList.observe(viewLifecycleOwner) { contacts ->
             contactsController.contactsList = contacts
             contactsController.requestModelBuild()
-
-            contacts_recycler_view.setController(contactsController)
         }
     }
 }
