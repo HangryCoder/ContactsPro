@@ -4,6 +4,10 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ContactsViewModel(context: Context) : ViewModel() {
 
@@ -15,6 +19,11 @@ class ContactsViewModel(context: Context) : ViewModel() {
     }
 
     fun fetchContacts() {
-        _contactsList.value = repository.getAllContacts().sortedBy { it.name.lowercase() }
+        viewModelScope.launch(Dispatchers.IO) {
+            val contacts = repository.getAllContacts().sortedBy { it.name.lowercase() }
+            withContext(Dispatchers.Main) {
+                _contactsList.value = contacts
+            }
+        }
     }
 }
