@@ -30,6 +30,9 @@ class FastScrollAdapter(
             contactName.text = contact.name
             alphabetIndex.text = contact.name[0].toString()
 
+            alphabetIndex.visibility =
+                if (mapIndex[contact.name[0].toString()] == position) View.VISIBLE else View.INVISIBLE
+
             Glide.with(contactProfilePhoto.context)
                 .load(contact.profilePhoto ?: R.drawable.ic_launcher_background)
                 .circleCrop()
