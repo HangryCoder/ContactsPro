@@ -44,8 +44,10 @@ class FastScrollRecyclerView : RecyclerView {
 
     private fun setupThings() {
         //create az text data
-        val sectionSet: Set<String> = //emptySet()
-            (adapter as FastScrollRecyclerViewInterface?)?.mapIndex?.keys as Set<String>
+        val sectionSet: Set<String>? = //emptySet()
+            (adapter as FastScrollRecyclerViewInterface?)?.mapIndex?.keys
+        sectionSet ?: return
+
         val listSection = ArrayList(sectionSet)
         listSection.sort()
         sections = arrayOfNulls(listSection.size)
