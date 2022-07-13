@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.hangrycoder.contactspro.R
 import java.util.*
@@ -12,7 +13,7 @@ import java.util.*
 class FastScrollRecyclerViewItemDecoration(private val mContext: Context) :
     RecyclerView.ItemDecoration() {
 
-   override fun onDrawOver(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+    override fun onDrawOver(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(canvas, parent, state)
         val scaledWidth = (parent as FastScrollRecyclerView).scaledWidth
         val sx = (parent as FastScrollRecyclerView).sx
@@ -28,8 +29,8 @@ class FastScrollRecyclerViewItemDecoration(private val mContext: Context) :
             val overlayDark = Paint()
             overlayDark.color = Color.BLACK
             overlayDark.alpha = 100
-            canvas.drawRect(0f, 0f, parent.width.toFloat(),
-                parent.height.toFloat(), overlayDark)
+//            canvas.drawRect(0f, 0f, parent.width.toFloat(),
+//                parent.height.toFloat(), overlayDark)
             val middleTextSize =
                 mContext.resources.getDimension(R.dimen.fast_scroll_overlay_text_size)
             val middleLetter = Paint()
@@ -41,12 +42,12 @@ class FastScrollRecyclerViewItemDecoration(private val mContext: Context) :
             val xPos = (canvas.width - middleTextSize.toInt()) / 2
             val yPos =
                 (canvas.height / 2 - (middleLetter.descent() + middleLetter.ascent()) / 2).toInt()
-            canvas.drawText(
-                section.uppercase(Locale.getDefault()),
-                xPos.toFloat(),
-                yPos.toFloat(),
-                middleLetter
-            )
+            /* canvas.drawText(
+                 section.uppercase(Locale.getDefault()),
+                 xPos.toFloat(),
+                 yPos.toFloat(),
+                 middleLetter
+             )*/
         }
         // draw indez A-Z
         val textPaint = Paint()
@@ -57,7 +58,8 @@ class FastScrollRecyclerViewItemDecoration(private val mContext: Context) :
                     Locale.getDefault()
                 ) == section.uppercase(Locale.getDefault())
             ) {
-                textPaint.color = Color.WHITE
+                textPaint.color =
+                    ContextCompat.getColor(mContext, R.color.primary_blue)//Color.WHITE
                 textPaint.alpha = 255
                 textPaint.isFakeBoldText = true
                 textPaint.textSize = (scaledWidth / 2)
