@@ -24,13 +24,13 @@ class FastScrollRecyclerViewItemDecoration(private val mContext: Context) :
         val showLetter = (parent as FastScrollRecyclerView).showLetter
 
         // We draw the letter in the middle
-        if (showLetter && section != null && section != "") {
+       /* if (showLetter && section != null && section != "") {
             //overlay everything when displaying selected index Letter in the middle
             val overlayDark = Paint()
             overlayDark.color = Color.BLACK
             overlayDark.alpha = 100
-//            canvas.drawRect(0f, 0f, parent.width.toFloat(),
-//                parent.height.toFloat(), overlayDark)
+            canvas.drawRect(0f, 0f, parent.width.toFloat(),
+                parent.height.toFloat(), overlayDark)
             val middleTextSize =
                 mContext.resources.getDimension(R.dimen.fast_scroll_overlay_text_size)
             val middleLetter = Paint()
@@ -42,14 +42,15 @@ class FastScrollRecyclerViewItemDecoration(private val mContext: Context) :
             val xPos = (canvas.width - middleTextSize.toInt()) / 2
             val yPos =
                 (canvas.height / 2 - (middleLetter.descent() + middleLetter.ascent()) / 2).toInt()
-            /* canvas.drawText(
+             canvas.drawText(
                  section.uppercase(Locale.getDefault()),
                  xPos.toFloat(),
                  yPos.toFloat(),
                  middleLetter
-             )*/
-        }
-        // draw indez A-Z
+             )
+        }*/
+
+        // draw index A-Z
         val textPaint = Paint()
         textPaint.isAntiAlias = true
         textPaint.style = Paint.Style.FILL
