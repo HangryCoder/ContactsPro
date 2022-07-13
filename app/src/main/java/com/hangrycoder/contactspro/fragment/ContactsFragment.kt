@@ -1,6 +1,7 @@
 package com.hangrycoder.contactspro.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,7 +51,7 @@ class ContactsFragment : Fragment() {
         viewModel.fetchContacts()
         viewModel.contactsList.observe(viewLifecycleOwner) { contacts ->
 
-            val mapIndex: HashMap<String, Int> = calculateIndexesForName(contacts)
+            val mapIndex: HashMap<Char, Int> = calculateIndexesForName(contacts)
             val adapter = FastScrollAdapter(contacts, mapIndex)
             view.contacts_recycler_view.adapter = adapter
             val decoration = FastScrollRecyclerViewItemDecoration(requireContext())
@@ -68,12 +69,41 @@ class ContactsFragment : Fragment() {
           }*/
     }
 
-    private fun calculateIndexesForName(items: List<Contacts>): HashMap<String, Int> {
-        val mapIndex: HashMap<String, Int> = LinkedHashMap()
+    private fun addFastScrollCharacterIndices() {
+        val indices = ArrayList<String>()
+        indices.add("...")
+        for (a in 'A'..'Z') {
+            indices.add(a.toString())
+        }
+        indices.add("#")
+    }
+
+    /* private fun calculateIndexesForName(items: List<Contacts>): HashMap<String, Int> {
+         val mapIndex: HashMap<String, Int> = LinkedHashMap()
+         for (i in items.indices) {
+             val name = items[i].name
+             var index = name.substring(0, 1)
+             index = index.uppercase(Locale.getDefault())
+             if (!mapIndex.containsKey(index)) {
+                 mapIndex[index] = i
+             }
+         }
+         return mapIndex
+     }*/
+
+    private fun calculateIndexesForName(items: List<Contacts>): HashMap<Char, Int> {
+        val mapIndex: HashMap<Char, Int> = LinkedHashMap()
         for (i in items.indices) {
             val name = items[i].name
-            var index = name.substring(0, 1)
-            index = index.uppercase(Locale.getDefault())
+            var index = name.first()//name.substring(0, 1)
+
+            index = if (index.isLetter()) {
+                index.uppercaseChar()
+            } else {
+                '#'
+            }
+
+            //index = index.uppercase(Locale.getDefault())
             if (!mapIndex.containsKey(index)) {
                 mapIndex[index] = i
             }

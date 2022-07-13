@@ -14,10 +14,10 @@ class FastScrollRecyclerView : RecyclerView {
     private var setupThings = false
     var scaledWidth = 0f
     var scaledHeight = 0f
-    lateinit var sections: Array<String?>
+    lateinit var sections: Array<Char?>
     var sx = 0f
     var sy = 0f
-    var section: String? = null
+    var section: Char? = null
     var showLetter = false
     private var listHandler: Handler? = null
 
@@ -44,7 +44,7 @@ class FastScrollRecyclerView : RecyclerView {
 
     private fun setupThings() {
         //create az text data
-        val sectionSet: Set<String>? = //emptySet()
+        val sectionSet: Set<Char>? = //emptySet()
             (adapter as FastScrollRecyclerViewInterface?)?.mapIndex?.keys
         sectionSet ?: return
 
@@ -78,13 +78,13 @@ class FastScrollRecyclerView : RecyclerView {
                     section = sections[currentPosition]
                     showLetter = true
                     var positionInData = 0
-                    if ((adapter as FastScrollRecyclerViewInterface?)!!.mapIndex!!.containsKey(
-                            section!!.uppercase(Locale.getDefault())
-                        )
-                    ) positionInData =
-                        (adapter as FastScrollRecyclerViewInterface?)!!.mapIndex!![section!!.uppercase(
-                            Locale.getDefault()
-                        )]!!
+                    if ((adapter as FastScrollRecyclerViewInterface?)?.mapIndex?.containsKey(
+                            section
+                        ) == true
+                    ) {
+                        positionInData =
+                            (adapter as FastScrollRecyclerViewInterface).mapIndex[section] ?: 0
+                    }
                     scrollToPosition(positionInData)
                     this@FastScrollRecyclerView.invalidate()
                 }
@@ -100,13 +100,16 @@ class FastScrollRecyclerView : RecyclerView {
                     section = sections[currentPosition]
                     showLetter = true
                     var positionInData = 0
-                    if ((adapter as FastScrollRecyclerViewInterface?)!!.mapIndex!!.containsKey(
-                            section!!.uppercase(Locale.getDefault())
-                        )
-                    ) positionInData =
-                        (adapter as FastScrollRecyclerViewInterface?)!!.mapIndex!![section!!.uppercase(
-                            Locale.getDefault()
-                        )]!!
+                    if ((adapter as FastScrollRecyclerViewInterface?)!!.mapIndex.containsKey(section)
+                    ) {
+                        positionInData =
+                            (adapter as FastScrollRecyclerViewInterface).mapIndex[section]
+                                ?: 0
+                        /*positionInData =
+                    (adapter as FastScrollRecyclerViewInterface?)!!.mapIndex!![section!!.uppercase(
+                        Locale.getDefault()
+                    )]!!*/
+                    }
                     scrollToPosition(positionInData)
                     this@FastScrollRecyclerView.invalidate()
                 }

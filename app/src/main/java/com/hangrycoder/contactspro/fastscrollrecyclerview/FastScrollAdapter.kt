@@ -12,7 +12,7 @@ import com.hangrycoder.contactspro.R
 
 class FastScrollAdapter(
     private val contacts: List<Contacts>,
-    override val mapIndex: HashMap<String, Int>
+    override val mapIndex: HashMap<Char, Int>
 ) : RecyclerView.Adapter<FastScrollAdapter.ViewHolder?>(), FastScrollRecyclerViewInterface {
 
     override fun onCreateViewHolder(
@@ -31,7 +31,7 @@ class FastScrollAdapter(
             alphabetIndex.text = contact.name[0].toString()
 
             alphabetIndex.visibility =
-                if (mapIndex[contact.name[0].toString()] == position) View.VISIBLE else View.INVISIBLE
+                if (mapIndex[contact.name[0]] == position) View.VISIBLE else View.INVISIBLE
 
             Glide.with(contactProfilePhoto.context)
                 .load(contact.profilePhoto ?: R.drawable.ic_launcher_background)

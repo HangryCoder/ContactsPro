@@ -55,7 +55,7 @@ class FastScrollRecyclerViewItemDecoration(private val mContext: Context) :
         textPaint.isAntiAlias = true
         textPaint.style = Paint.Style.FILL
         for (i in sections.indices) {
-            if (showLetter && section != null && section != "" && sections[i]?.uppercase(
+            if (showLetter && section != null && sections[i]?.uppercase(
                     Locale.getDefault()
                 ) == section.uppercase(Locale.getDefault())
             ) {
