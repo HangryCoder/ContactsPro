@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import androidx.recyclerview.widget.RecyclerView
 import com.hangrycoder.contactspro.utils.delayOnLifecycle
 import java.util.*
+import kotlin.math.floor
 
 class FastScrollRecyclerView : RecyclerView {
     private var ctx: Context
@@ -63,46 +64,40 @@ class FastScrollRecyclerView : RecyclerView {
     override fun onTouchEvent(event: MotionEvent): Boolean {
         val x = event.x
         val y = event.y
+        val fastScrollAdapter = adapter as FastScrollRecyclerViewInterface?
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                if (x < sx - scaledWidth || y < sy || y > sy + scaledHeight * sections.size) return super.onTouchEvent(
-                    event
-                ) else {
+                if (x < sx - scaledWidth || y < sy || y > sy + scaledHeight * sections.size)
+                    return super.onTouchEvent(event)
+                else {
                     // We touched the index bar
                     val yy = y - this.paddingTop - paddingBottom - sy
-                    var currentPosition = Math.floor((yy / scaledHeight).toDouble()).toInt()
+                    var currentPosition = floor((yy / scaledHeight).toDouble()).toInt()
                     if (currentPosition < 0) currentPosition = 0
                     if (currentPosition >= sections.size) currentPosition = sections.size - 1
                     section = sections[currentPosition]
                     showLetter = true
                     var positionInData = 0
-                    if ((adapter as FastScrollRecyclerViewInterface?)?.mapIndex?.containsKey(
-                            section
-                        ) == true
-                    ) {
-                        positionInData =
-                            (adapter as FastScrollRecyclerViewInterface).mapIndex[section] ?: 0
+                    if (fastScrollAdapter?.mapIndex?.containsKey(section) == true) {
+                        positionInData = fastScrollAdapter.mapIndex[section] ?: 0
                     }
                     scrollToPosition(positionInData)
                     this@FastScrollRecyclerView.invalidate()
                 }
             }
             MotionEvent.ACTION_MOVE -> {
-                if (!showLetter && (x < sx - scaledWidth || y < sy || y > sy + scaledHeight * sections.size)) return super.onTouchEvent(
-                    event
-                ) else {
+                if (!showLetter && (x < sx - scaledWidth || y < sy || y > sy + scaledHeight * sections.size))
+                    return super.onTouchEvent(event)
+                else {
                     val yy = y - sy
-                    var currentPosition = Math.floor((yy / scaledHeight).toDouble()).toInt()
+                    var currentPosition = floor((yy / scaledHeight).toDouble()).toInt()
                     if (currentPosition < 0) currentPosition = 0
                     if (currentPosition >= sections.size) currentPosition = sections.size - 1
                     section = sections[currentPosition]
                     showLetter = true
                     var positionInData = 0
-                    if ((adapter as FastScrollRecyclerViewInterface?)!!.mapIndex.containsKey(section)
-                    ) {
-                        positionInData =
-                            (adapter as FastScrollRecyclerViewInterface).mapIndex[section]
-                                ?: 0
+                    if (fastScrollAdapter?.mapIndex?.containsKey(section) == true) {
+                        positionInData = fastScrollAdapter.mapIndex[section] ?: 0
                     }
                     scrollToPosition(positionInData)
                     this@FastScrollRecyclerView.invalidate()
@@ -113,9 +108,8 @@ class FastScrollRecyclerView : RecyclerView {
                     showLetter = false
                     this@FastScrollRecyclerView.invalidate()
                 }
-                return if (x < sx - scaledWidth || y < sy || y > sy + scaledHeight * sections.size) super.onTouchEvent(
-                    event
-                ) else true
+                return if (x < sx - scaledWidth || y < sy || y > sy + scaledHeight * sections.size)
+                    super.onTouchEvent(event) else true
             }
         }
         return true
