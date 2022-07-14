@@ -39,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:paddingHorizontal="16dp"
+            android:paddingBottom="8dp"
             app:stl_clickable="true"
             app:stl_customTabTextLayoutId="@layout/custom_tab_item"
             app:stl_defaultTabBackground="?attr/selectableItemBackground"
@@ -54,14 +55,15 @@
             app:stl_indicatorThickness="36dp"
             app:stl_indicatorWidth="auto"
             app:stl_indicatorWithoutPadding="false"
-            app:stl_titleOffset="24dp" />
+            app:stl_titleOffset="24dp"
+            app:stl_underlineThickness="0dp" />
 
-        <include
+        <!--     <include
             layout="@layout/layout_search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginBottom="16dp" />-->
 
     </com.google.android.material.appbar.AppBarLayout>
 

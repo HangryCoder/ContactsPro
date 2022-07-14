@@ -20,9 +20,5 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         smartTabLayout.setViewPager(viewPager)
-
-        /* ContactsUtil.getAllContacts(this).forEach { name ->
-             Log.d("CONTACTS PRO", name)
-         }*/
     }
 }
