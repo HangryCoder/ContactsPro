@@ -2,11 +2,13 @@ package com.hangrycoder.contactspro.fastscrollrecyclerview
 
 import android.content.Context
 import android.graphics.Canvas
-import android.os.Handler
-import android.os.Message
 import android.util.AttributeSet
 import android.view.MotionEvent
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.*
 
 class FastScrollRecyclerView : RecyclerView {
@@ -19,7 +21,6 @@ class FastScrollRecyclerView : RecyclerView {
     var sy = 0f
     var section: Char? = null
     var showLetter = false
-    private var listHandler: Handler? = null
 
     constructor(context: Context) : super(context) {
         ctx = context
@@ -111,22 +112,19 @@ class FastScrollRecyclerView : RecyclerView {
                 }
             }
             MotionEvent.ACTION_UP -> {
-                listHandler = ListHandler()
-                listHandler?.sendEmptyMessageDelayed(0, 100)
+                findViewTreeLifecycleOwner()?.let { lifecycleOwner ->
+                    lifecycleOwner.lifecycle.coroutineScope.launch {
+                        delay(100L)
+                        showLetter = false
+                        this@FastScrollRecyclerView.invalidate()
+                    }
+                }
                 return if (x < sx - scaledWidth || y < sy || y > sy + scaledHeight * sections.size) super.onTouchEvent(
                     event
                 ) else true
             }
         }
         return true
-    }
-
-    private inner class ListHandler : Handler() {
-        override fun handleMessage(msg: Message) {
-            super.handleMessage(msg)
-            showLetter = false
-            this@FastScrollRecyclerView.invalidate()
-        }
     }
 
     companion object {
