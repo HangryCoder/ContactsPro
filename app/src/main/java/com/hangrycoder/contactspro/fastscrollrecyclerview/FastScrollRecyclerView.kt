@@ -14,7 +14,7 @@ class FastScrollRecyclerView : RecyclerView {
     private var setupThings = false
     var scaledWidth = 0f
     var scaledHeight = 0f
-    lateinit var sections: Array<Char?>
+    var sections: Array<Char?> = emptyArray()
     var sx = 0f
     var sy = 0f
     var section: Char? = null
