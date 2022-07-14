@@ -44,7 +44,7 @@ class FastScrollRecyclerView : RecyclerView {
 
     private fun setupThings() {
         //create az text data
-        val sectionSet: Set<Char>? = //emptySet()
+        val sectionSet: Set<Char>? =
             (adapter as FastScrollRecyclerViewInterface?)?.mapIndex?.keys
         sectionSet ?: return
 
@@ -105,10 +105,6 @@ class FastScrollRecyclerView : RecyclerView {
                         positionInData =
                             (adapter as FastScrollRecyclerViewInterface).mapIndex[section]
                                 ?: 0
-                        /*positionInData =
-                    (adapter as FastScrollRecyclerViewInterface?)!!.mapIndex!![section!!.uppercase(
-                        Locale.getDefault()
-                    )]!!*/
                     }
                     scrollToPosition(positionInData)
                     this@FastScrollRecyclerView.invalidate()
@@ -116,7 +112,7 @@ class FastScrollRecyclerView : RecyclerView {
             }
             MotionEvent.ACTION_UP -> {
                 listHandler = ListHandler()
-                listHandler!!.sendEmptyMessageDelayed(0, 100)
+                listHandler?.sendEmptyMessageDelayed(0, 100)
                 return if (x < sx - scaledWidth || y < sy || y > sy + scaledHeight * sections.size) super.onTouchEvent(
                     event
                 ) else true
