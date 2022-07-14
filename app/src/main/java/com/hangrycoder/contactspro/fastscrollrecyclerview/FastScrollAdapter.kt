@@ -28,10 +28,13 @@ class FastScrollAdapter(
         val contact = contacts[position]
         with(holder) {
             contactName.text = contact.name
-            alphabetIndex.text = contact.name[0].toString()
+
+            val firstChar = contact.name[0]
+            val characterIndex = if (firstChar.isLetter()) firstChar else '#'
+            alphabetIndex.text = characterIndex.toString()
 
             alphabetIndex.visibility =
-                if (mapIndex[contact.name[0]] == position) View.VISIBLE else View.INVISIBLE
+                if (mapIndex[characterIndex] == position) View.VISIBLE else View.INVISIBLE
 
             Glide.with(contactProfilePhoto.context)
                 .load(contact.profilePhoto ?: R.drawable.ic_launcher_background)
