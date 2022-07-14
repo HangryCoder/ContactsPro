@@ -4,11 +4,8 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.MotionEvent
-import androidx.lifecycle.coroutineScope
-import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.hangrycoder.contactspro.utils.delayOnLifecycle
 import java.util.*
 
 class FastScrollRecyclerView : RecyclerView {
@@ -112,12 +109,9 @@ class FastScrollRecyclerView : RecyclerView {
                 }
             }
             MotionEvent.ACTION_UP -> {
-                findViewTreeLifecycleOwner()?.let { lifecycleOwner ->
-                    lifecycleOwner.lifecycle.coroutineScope.launch {
-                        delay(100L)
-                        showLetter = false
-                        this@FastScrollRecyclerView.invalidate()
-                    }
+                delayOnLifecycle(SHOW_LETTER_DELAY_IN_MILLIS) {
+                    showLetter = false
+                    this@FastScrollRecyclerView.invalidate()
                 }
                 return if (x < sx - scaledWidth || y < sy || y > sy + scaledHeight * sections.size) super.onTouchEvent(
                     event
@@ -130,5 +124,6 @@ class FastScrollRecyclerView : RecyclerView {
     companion object {
         var indWidth = 25
         var indHeight = 18
+        var SHOW_LETTER_DELAY_IN_MILLIS = 100L
     }
 }
